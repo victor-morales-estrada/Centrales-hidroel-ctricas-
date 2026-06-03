@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energía Hidráulica — 1º Bach B</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e1a2b;
+  --deep: #112240;
+  --mid: #1a4a7a;
+  --water: #1e88c8;
+  --foam: #5ac8f5;
+  --ice: #a8dff5;
+  --sand: #f5f0e8;
+  --gold: #c8a455;
+  --gold-light: #e8c878;
+  --white: #ffffff;
+  --text: #1a2535;
+  --muted: #5a7090;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--sand);
+  color:var(--text);
+  font-size:15px;
+  line-height:1.75;
+}
+
+/* ===== PORTADA ===== */
+.cover{
+  min-height:100vh;
+  background:var(--ink);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:0;
+  position:relative;
+  overflow:hidden;
+}
+.cover-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 30% 20%, rgba(30,136,200,0.22) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 60% at 80% 80%, rgba(90,200,245,0.1) 0%,transparent 50%),
+    radial-gradient(ellipse 40% 30% at 60% 10%, rgba(200,164,85,0.08) 0%,transparent 40%);
+  pointer-events:none;
+}
+.cover-wave{
+  position:absolute;bottom:0;left:0;right:0;
+}
+.cover-top{
+  padding:48px 64px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  position:relative;z-index:2;
+}
+.cover-badge{
+  font-size:0.68rem;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--foam);
+  opacity:0.8;
+}
+.cover-members{
+  text-align:right;
+}
+.cover-members p{
+  font-size:0.72rem;
+  color:rgba(255,255,255,0.45);
+  line-height:1.9;
+  letter-spacing:0.03em;
+}
+.cover-members p strong{
+  color:rgba(255,255,255,0.75);
+  font-weight:500;
+}
+.cover-center{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:60px 64px;
+  position:relative;z-index:2;
+}
+.cover-eyebrow{
+  font-size:0.7rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:18px;
+}
+.cover-h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,7vw,6.5rem);
+  font-weight:700;
+  color:var(--white);
+  line-height:1.0;
+  margin-bottom:12px;
+}
+.cover-h1 em{
+  font-style:italic;
+  color:var(--foam);
+}
+.cover-subtitle{
+  font-size:1rem;
+  color:rgba(255,255,255,0.5);
+  max-width:480px;
+  font-weight:300;
+  margin-bottom:40px;
+  line-height:1.6;
+}
+.cover-line{
+  width:60px;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--foam));
+  margin-bottom:28px;
+}
+.cover-meta{
+  display:flex;gap:32px;flex-wrap:wrap;
+}
+.cover-meta-item{
+  display:flex;flex-direction:column;gap:3px;
+}
+.cover-meta-item span:first-child{
+  font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.7;
+}
+.cover-meta-item span:last-child{
+  font-size:0.82rem;color:rgba(255,255,255,0.7);
+}
+
+/* ===== NAVIGATION INDEX ===== */
+.nav-section{
+  background:var(--deep);
+  padding:48px 64px;
+}
+.nav-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.75rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--foam);
+  margin-bottom:28px;
+}
+.nav-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:8px;
+}
+.nav-item{
+  display:flex;align-items:center;gap:14px;
+  padding:12px 16px;
+  border:1px solid rgba(90,200,245,0.12);
+  border-radius:4px;
+  text-decoration:none;
+  color:rgba(255,255,255,0.6);
+  font-size:0.82rem;
+  transition:all 0.2s;
+  cursor:pointer;
+}
+.nav-item:hover{border-color:var(--foam);color:var(--white);background:rgba(90,200,245,0.07);}
+.nav-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;color:var(--foam);opacity:0.5;min-width:22px;line-height:1;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.wrap{max-width:960px;margin:0 auto;padding:0 48px 80px;}
+
+/* ===== SECTIONS ===== */
+.section{padding:64px 0 0;}
+.section-header{
+  display:flex;align-items:flex-start;gap:20px;
+  padding-bottom:20px;
+  border-bottom:1px solid rgba(0,0,0,0.08);
+  margin-bottom:28px;
+}
+.section-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:4.5rem;font-weight:700;
+  color:var(--water);opacity:0.12;
+  line-height:1;min-width:56px;margin-top:-10px;
+}
+.section-head-text .label{
+  font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--water);margin-bottom:4px;
+}
+.section-head-text h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,3vw,2.3rem);font-weight:700;
+  color:var(--ink);line-height:1.1;
+}
+.body-text{
+  font-size:0.93rem;line-height:1.85;color:#2a3545;
+  margin-bottom:16px;
+}
+.body-text strong{color:var(--ink);font-weight:500;}
+
+/* ===== CALLOUT ===== */
+.callout{
+  background:var(--deep);
+  border-left:3px solid var(--foam);
+  padding:18px 24px;
+  margin:24px 0;
+  border-radius:0 4px 4px 0;
+}
+.callout p{font-size:0.88rem;line-height:1.7;color:rgba(255,255,255,0.8);}
+.callout .icon{font-size:1.2rem;display:block;margin-bottom:6px;}
+
+/* ===== TABLE ===== */
+.data-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:0.85rem;}
+.data-table th{
+  background:var(--deep);color:var(--foam);
+  padding:10px 14px;text-align:left;font-weight:500;letter-spacing:0.04em;
+}
+.data-table td{padding:9px 14px;border-bottom:1px solid rgba(0,0,0,0.06);}
+.data-table tr:nth-child(even) td{background:rgba(30,136,200,0.04);}
+.data-table tr:hover td{background:rgba(90,200,245,0.08);}
+
+/* ===== GRID CARDS ===== */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;}
+.card{
+  background:var(--deep);border:1px solid rgba(90,200,245,0.12);
+  border-radius:4px;padding:20px;
+}
+.card h4{font-family:'Cormorant Garamond',serif;color:var(--foam);font-size:1rem;margin-bottom:8px;}
+.card p{font-size:0.82rem;line-height:1.7;color:rgba(255,255,255,0.7);}
+
+/* ===== LIST ===== */
+.tech-list{list-style:none;margin:16px 0;}
+.tech-list li{
+  padding:9px 0 9px 24px;
+  border-bottom:1px solid rgba(0,0,0,0.05);
+  position:relative;font-size:0.88rem;
+}
+.tech-list li::before{content:'▸';position:absolute;left:0;color:var(--foam);font-size:0.75rem;top:11px;}
+
+/* ===== IMG BLOCK ===== */
+.fig{margin:24px 0;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);}
+.fig-cap{
+  background:var(--deep);color:rgba(255,255,255,0.5);
+  font-size:0.72rem;padding:7px 14px;font-style:italic;letter-spacing:0.02em;
+}
+
+/* ===== DIVIDER ===== */
+.div{height:1px;background:linear-gradient(90deg,transparent,rgba(30,136,200,0.25),transparent);margin:56px 0 0;}
+
+/* ===== BADGE ===== */
+.badge{
+  display:inline-block;background:rgba(30,136,200,0.1);
+  border:1px solid rgba(30,136,200,0.25);color:var(--mid);
+  font-size:0.7rem;padding:3px 9px;border-radius:2px;
+  margin:3px;letter-spacing:0.04em;
+}
+
+/* ===== FORMULA BOX ===== */
+.formula{
+  background:var(--ink);color:var(--ice);
+  font-family:'Cormorant Garamond',serif;font-size:1.3rem;
+  text-align:center;padding:20px;border-radius:4px;
+  border:1px solid rgba(90,200,245,0.2);margin:20px 0;
+  letter-spacing:0.06em;
+}
+.formula small{font-size:0.7rem;color:rgba(255,255,255,0.4);display:block;margin-top:6px;font-family:'DM Sans',sans-serif;letter-spacing:0.05em;}
+
+/* ===== STAT BOXES ===== */
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0;}
+.stat{
+  flex:1;min-width:120px;
+  background:var(--ink);border:1px solid rgba(90,200,245,0.15);
+  border-radius:4px;padding:16px;text-align:center;
+}
+.stat-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:700;color:var(--foam);line-height:1;
+  margin-bottom:4px;
+}
+.stat-label{font-size:0.7rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;}
+
+/* ===== TURBINE TYPE CARDS ===== */
+.turb-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0;}
+.turb-card{
+  background:var(--ink);border:1px solid rgba(90,200,245,0.15);
+  border-radius:6px;overflow:hidden;
+}
+.turb-head{background:rgba(30,136,200,0.15);padding:14px;text-align:center;}
+.turb-head h4{font-family:'Cormorant Garamond',serif;color:var(--foam);font-size:1.15rem;}
+.turb-head .range{font-size:0.72rem;color:var(--gold);margin-top:2px;}
+.turb-body{padding:14px;}
+.turb-body p{font-size:0.78rem;color:rgba(255,255,255,0.6);line-height:1.6;}
+
+/* ===== FLOW DIAGRAM ===== */
+.flow{display:flex;align-items:center;gap:6px;margin:20px 0;flex-wrap:wrap;}
+.flow-step{
+  background:var(--deep);border:1px solid rgba(90,200,245,0.2);
+  border-radius:4px;padding:10px 14px;text-align:center;flex:1;min-width:80px;
+}
+.flow-step .fs-n{font-size:0.6rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;}
+.flow-step .fs-t{font-size:0.78rem;color:var(--white);font-weight:500;margin-top:2px;}
+.flow-step .fs-e{font-size:0.65rem;color:var(--foam);margin-top:1px;}
+.flow-arr{color:var(--water);font-size:1rem;opacity:0.6;flex-shrink:0;}
+
+/* ===== REGION BOXES ===== */
+.region-box{
+  background:linear-gradient(135deg,var(--deep),var(--ink));
+  border:1px solid rgba(200,164,85,0.2);border-radius:6px;
+  padding:20px 24px;margin:16px 0;
+}
+.region-box h4{font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:1.1rem;margin-bottom:8px;}
+.region-box p{font-size:0.85rem;color:rgba(255,255,255,0.65);line-height:1.7;}
+
+/* ===== CONCLUSION ===== */
+.conclusion{
+  background:var(--deep);
+  padding:48px;
+  border-radius:8px;
+  margin:40px 0;
+  border:1px solid rgba(90,200,245,0.12);
+  position:relative;overflow:hidden;
+}
+.conclusion::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--foam),var(--water));
+}
+.conclusion h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;color:var(--white);margin-bottom:16px;
+}
+.conclusion p{font-size:0.9rem;color:rgba(255,255,255,0.7);line-height:1.85;margin-bottom:12px;}
+
+/* ===== FOOTER ===== */
+footer{
+  background:var(--ink);color:rgba(255,255,255,0.3);
+  text-align:center;padding:36px;font-size:0.75rem;
+  letter-spacing:0.05em;line-height:1.9;
+}
+footer span{color:var(--foam);opacity:0.6;}
+
+/* ===== PROS/CONS ===== */
+.pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;}
+.pros,.cons{background:var(--ink);border-radius:4px;padding:18px;}
+.pros{border-top:2px solid #4caf50;}
+.cons{border-top:2px solid #ef5350;}
+.pros h4{color:#81c784;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;}
+.cons h4{color:#ef9a9a;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;}
+.pros ul,.cons ul{list-style:none;padding:0;}
+.pros li,.cons li{font-size:0.82rem;color:rgba(255,255,255,0.65);padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.pros li::before{content:'+ ';color:#81c784;font-weight:700;}
+.cons li::before{content:'− ';color:#ef9a9a;font-weight:700;}
+
+@media(max-width:700px){
+  .wrap{padding:0 20px 60px;}
+  .cover-top,.cover-center,.nav-section{padding-left:24px;padding-right:24px;}
+  .cards,.turb-cards,.pros-cons{grid-template-columns:1fr;}
+  .flow{flex-direction:column;}
+  .flow-arr{transform:rotate(90deg);}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== PORTADA ===== -->
+<div class="cover">
+  <div class="cover-bg"></div>
+  <div class="cover-top">
+    <div>
+      <p class="cover-badge">Tecnología e Ingeniería · 1.º Bachillerato B</p>
+    </div>
+    <div class="cover-members">
+      <p><strong>Víctor Morales Estrada</strong></p>
+      <p><strong>Ángel Sánchez López</strong></p>
+      <p><strong>Francisco José Barranco Fernández</strong></p>
+      <p><strong>Javier Palenzuela Sánchez</strong></p>
+    </div>
+  </div>
+
+  <div class="cover-center">
+    <p class="cover-eyebrow">Trabajo de investigación</p>
+    <h1 class="cover-h1"><em>Energía</em><br>Hidráulica</h1>
+    <p class="cover-subtitle">Funcionamiento, constitución y clasificación de las centrales hidroeléctricas. Impacto ambiental y situación en España y Andalucía.</p>
+    <div class="cover-line"></div>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><span>Asignatura</span><span>Tecnología e Ingeniería I</span></div>
+      <div class="cover-meta-item"><span>Curso</span><span>1.º Bachillerato B</span></div>
+      <div class="cover-meta-item"><span>Año</span><span>2025–2026</span></div>
+    </div>
+  </div>
+
+  <!-- WAVE SVG -->
+  <svg class="cover-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 Q180,80 360,40 Q540,0 720,40 Q900,80 1080,40 Q1260,0 1440,40 L1440,90 L0,90 Z" fill="#f5f0e8"/>
+  </svg>
+</div>
+
+<!-- ===== ÍNDICE ===== -->
+<section class="nav-section">
+  <p class="nav-title">Índice de contenidos</p>
+  <div class="nav-grid">
+    <a class="nav-item" href="#intro"><span class="nav-n">I</span>Introducción</a>
+    <a class="nav-item" href="#principios"><span class="nav-n">II</span>Principios de funcionamiento</a>
+    <a class="nav-item" href="#constitucion"><span class="nav-n">III</span>Constitución de la central</a>
+    <a class="nav-item" href="#clasificacion"><span class="nav-n">IV</span>Clasificación</a>
+    <a class="nav-item" href="#emplazamiento"><span class="nav-n">V</span>Emplazamiento</a>
+    <a class="nav-item" href="#impacto"><span class="nav-n">VI</span>Impacto ambiental</a>
+    <a class="nav-item" href="#espana"><span class="nav-n">VII</span>España y Andalucía</a>
+    <a class="nav-item" href="#conclusion"><span class="nav-n">VIII</span>Conclusión</a>
+  </div>
+</section>
+
+<!-- ===== CONTENIDO ===== -->
+<main class="wrap">
+
+<!-- ====== I. INTRODUCCIÓN ====== -->
+<section class="section" id="intro">
+  <div class="section-header">
+    <div class="section-n">I</div>
+    <div class="section-head-text">
+      <p class="label">Punto de partida</p>
+      <h2>Introducción</h2>
+    </div>
+  </div>
+
+  <p class="body-text">La <strong>energía hidráulica</strong> es una de las fuentes renovables más antiguas y eficientes que utiliza la humanidad. Su origen es esencialmente solar: el Sol evapora el agua de mares y lagos, el viento la transporta y la lluvia la deposita a cierta altura sobre el terreno, dotándola de <strong>energía potencial gravitatoria</strong>. Las centrales hidroeléctricas aprovechan esa energía acumulada para producir electricidad limpia y regulable.</p>
+
+  <p class="body-text">A diferencia de otras renovables como la solar o la eólica, la hidroeléctrica es <strong>fácilmente regulable</strong>: puede arrancar o parar en minutos según la demanda, lo que la convierte en un recurso estratégico para estabilizar la red eléctrica. Actualmente genera en torno al <strong>16% de la electricidad mundial</strong> y representa más del 60% de toda la generación renovable global.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-val">~90%</div><div class="stat-label">Eficiencia global</div></div>
+    <div class="stat"><div class="stat-val">16%</div><div class="stat-label">Electricidad mundial</div></div>
+    <div class="stat"><div class="stat-val">&gt;50 años</div><div class="stat-label">Vida útil media</div></div>
+    <div class="stat"><div class="stat-val">0 g CO₂</div><div class="stat-label">Emisiones directas</div></div>
+  </div>
+
+  <p class="body-text">En este trabajo estudiamos cómo está constituida una central hidroeléctrica, los principios físicos que la gobiernan, su clasificación, los criterios de emplazamiento y su impacto ambiental, con especial atención a la situación en España y Andalucía.</p>
+</section>
+
+<div class="div"></div>
+
+<!-- ====== II. PRINCIPIOS ====== -->
+<section class="section" id="principios">
+  <div class="section-header">
+    <div class="section-n">II</div>
+    <div class="section-head-text">
+      <p class="label">Física del proceso</p>
+      <h2>Principios de Funcionamiento</h2>
+    </div>
+  </div>
+
+  <p class="body-text">El proceso de generación hidroeléctrica consiste en una cadena de transformaciones energéticas sucesivas, todas ellas regidas por la <strong>ley de conservación de la energía</strong>:</p>
+
+  <!-- FLOW DIAGRAM -->
+  <div class="flow">
+    <div class="flow-step"><div class="fs-n">1</div><div class="fs-t">Energía Potencial</div><div class="fs-e">E = mgh</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-step"><div class="fs-n">2</div><div class="fs-t">Energía Cinética</div><div class="fs-e">Agua en caída</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-step"><div class="fs-n">3</div><div class="fs-t">E. Mecánica</div><div class="fs-e">Turbina gira</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-step"><div class="fs-n">4</div><div class="fs-t">E. Eléctrica</div><div class="fs-e">Alternador</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-step"><div class="fs-n">5</div><div class="fs-t">Alta Tensión</div><div class="fs-e">Transformador</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-step"><div class="fs-n">6</div><div class="fs-t">Red Eléctrica</div><div class="fs-e">Consumidor</div></div>
+  </div>
+
+  <p class="body-text">El <strong>agua acumulada en el embalse</strong> posee energía potencial (Ep = m·g·h). Al descender por la tubería forzada, esa energía se convierte en cinética. El chorro a gran velocidad impacta sobre los álabes de la <strong>turbina hidráulica</strong>, haciéndola girar y generando energía mecánica de rotación. Ese eje está acoplado a un <strong>alternador</strong> que, por inducción electromagnética (ley de Faraday), produce corriente alterna. Finalmente, el <strong>transformador elevador</strong> sube la tensión para reducir pérdidas por efecto Joule en el transporte.</p>
+
+  <div class="formula">
+    P = η · ρ · g · Q · H
+    <small>P = potencia (W) · η = rendimiento (~0,88) · ρ = densidad agua (1000 kg/m³) · g = 9,81 m/s² · Q = caudal (m³/s) · H = salto neto (m)</small>
+  </div>
+
+  <div class="callout">
+    <span class="icon">💡</span>
+    <p><strong>¿Por qué elevar la tensión?</strong> Las pérdidas en una línea son P = I²·R. Si multiplicamos la tensión por un factor k, la intensidad se divide entre k y las pérdidas se reducen k² veces. Elevar de 10 kV a 400 kV (factor ×40) reduce las pérdidas de transporte <strong>1600 veces</strong>.</p>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ====== III. CONSTITUCIÓN ====== -->
+<section class="section" id="constitucion">
+  <div class="section-header">
+    <div class="section-n">III</div>
+    <div class="section-head-text">
+      <p class="label">Elementos de la instalación</p>
+      <h2>Constitución de una Central Hidroeléctrica</h2>
+    </div>
+  </div>
+
+  <!-- ESQUEMA GENERAL SVG -->
+  <div class="fig">
+    <svg viewBox="0 0 820 280" width="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="820" height="280" fill="#0e1a2b"/>
+      <defs>
+        <linearGradient id="gW" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1a4a7a"/><stop offset="100%" stop-color="#0e2a50"/></linearGradient>
+        <marker id="aB" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3z" fill="#5ac8f5" opacity="0.9"/></marker>
+        <marker id="aG" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3z" fill="#c8a455"/></marker>
+      </defs>
+      <!-- FONDO TIERRA -->
+      <path d="M0,230 Q200,210 400,220 Q600,230 820,215 L820,280 L0,280Z" fill="#1a2e14" opacity="0.5"/>
+      <!-- MONTAÑA -->
+      <path d="M0,180 Q50,100 100,80 Q140,65 170,95 Q200,125 210,180 L0,180Z" fill="#2a2520" opacity="0.65"/>
+      <path d="M0,195 Q40,140 80,120 Q100,112 120,130 L0,210Z" fill="#1a3010" opacity="0.3"/>
+      <!-- EMBALSE -->
+      <path d="M0,155 Q60,148 120,152 Q150,154 160,148 L160,220 L0,220Z" fill="url(#gW)" opacity="0.85"/>
+      <path d="M5,158 Q60,153 120,157 Q145,159 160,154" stroke="#5ac8f5" stroke-width="0.9" fill="none" opacity="0.45"/>
+      <path d="M5,167 Q60,163 120,166 Q145,168 155,165" stroke="#5ac8f5" stroke-width="0.6" fill="none" opacity="0.25"/>
+      <text x="75" y="145" fill="#5ac8f5" font-size="8" text-anchor="middle" font-family="serif" opacity="0.6">EMBALSE</text>
+      <!-- PRESA -->
+      <path d="M160,100 L180,220 L160,220Z" fill="#3a3530"/>
+      <path d="M160,100 L192,220 L180,220Z" fill="#4a4540"/>
+      <rect x="160" y="97" width="32" height="6" rx="1" fill="#5a5550"/>
+      <!-- ALIVIADERO -->
+      <rect x="168" y="160" width="8" height="16" fill="#5ac8f5" opacity="0.45" rx="1"/>
+      <!-- TOMA AGUA -->
+      <rect x="181" y="192" width="20" height="14" fill="#1e88c8" rx="2" opacity="0.9"/>
+      <rect x="183" y="194" width="4" height="10" fill="#0e1a2b" rx="1"/>
+      <rect x="189" y="194" width="4" height="10" fill="#0e1a2b" rx="1"/>
+      <rect x="195" y="194" width="4" height="10" fill="#0e1a2b" rx="1"/>
+      <!-- CANAL DERIVACIÓN -->
+      <path d="M201,196 Q270,188 330,191 Q370,193 395,196" stroke="#1e88c8" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M201,196 Q270,188 330,191 Q370,193 395,196" stroke="#5ac8f5" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+      <!-- flechas agua -->
+      <path d="M230,192 L255,190" stroke="#5ac8f5" stroke-width="1.2" marker-end="url(#aB)" opacity="0.7"/>
+      <path d="M310,190 L335,191" stroke="#5ac8f5" stroke-width="1.2" marker-end="url(#aB)" opacity="0.7"/>
+      <!-- CÁMARA PRESIÓN -->
+      <rect x="395" y="187" width="36" height="24" rx="3" fill="#112240" stroke="#5ac8f5" stroke-width="1.2"/>
+      <rect x="398" y="190" width="30" height="14" rx="2" fill="#1a4a7a" opacity="0.7"/>
+      <path d="M400,195 Q413,192 425,195" stroke="#5ac8f5" stroke-width="0.9" fill="none" opacity="0.6"/>
+      <!-- TUBERÍA PRESIÓN -->
+      <path d="M413,211 Q418,222 424,238 Q434,255 452,265" stroke="#1a4a7a" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <path d="M413,211 Q418,222 424,238 Q434,255 452,265" stroke="#5ac8f5" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+      <!-- CÁMARA TURBINAS -->
+      <rect x="458" y="252" width="88" height="24" rx="2" fill="#112240" stroke="#5ac8f5" stroke-width="1"/>
+      <rect x="458" y="245" width="88" height="12" rx="2" fill="#0e2a50"/>
+      <rect x="464" y="248" width="10" height="6" fill="#5ac8f5" opacity="0.25" rx="1"/>
+      <rect x="480" y="248" width="10" height="6" fill="#5ac8f5" opacity="0.25" rx="1"/>
+      <rect x="496" y="248" width="10" height="6" fill="#5ac8f5" opacity="0.25" rx="1"/>
+      <rect x="512" y="248" width="10" height="6" fill="#5ac8f5" opacity="0.25" rx="1"/>
+      <!-- turbina símbolo -->
+      <circle cx="492" cy="265" r="7" fill="#0e1a2b" stroke="#5ac8f5" stroke-width="1"/>
+      <path d="M492,258 L492,272 M485,265 L499,265" stroke="#5ac8f5" stroke-width="1.2"/>
+      <circle cx="492" cy="265" r="2.5" fill="#5ac8f5" opacity="0.7"/>
+      <!-- CANAL DESAGÜE -->
+      <path d="M546,264 Q590,260 635,256 Q680,252 730,255 Q770,257 810,255" stroke="#1e88c8" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path d="M546,264 Q590,260 635,256 Q680,252 730,255 Q770,257 810,255" stroke="#5ac8f5" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+      <!-- PARQUE TRANSFORMACIÓN -->
+      <rect x="568" y="214" width="62" height="28" rx="2" fill="#1a1628" stroke="#c8a455" stroke-width="1"/>
+      <rect x="572" y="218" width="14" height="18" rx="1" fill="#2a2040" stroke="#c8a455" stroke-width="0.8"/>
+      <rect x="590" y="218" width="14" height="18" rx="1" fill="#2a2040" stroke="#c8a455" stroke-width="0.8"/>
+      <rect x="608" y="218" width="14" height="18" rx="1" fill="#2a2040" stroke="#c8a455" stroke-width="0.8"/>
+      <!-- cable eléctrico -->
+      <line x1="599" y1="214" x2="599" y2="244" stroke="#c8a455" stroke-width="1.2" opacity="0.7"/>
+      <line x1="599" y1="214" x2="599" y2="185" stroke="#c8a455" stroke-width="1" opacity="0.6"/>
+      <line x1="599" y1="185" x2="760" y2="148" stroke="#c8a455" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+      <!-- torre AT -->
+      <g opacity="0.7" stroke="#c8a455" stroke-width="1.5">
+        <line x1="760" y1="130" x2="760" y2="165"/>
+        <line x1="748" y1="140" x2="772" y2="140"/>
+        <line x1="752" y1="148" x2="768" y2="148"/>
+        <line x1="760" y1="140" x2="754" y2="152"/>
+        <line x1="760" y1="140" x2="766" y2="152"/>
+      </g>
+      <!-- COTA SALTO -->
+      <line x1="150" y1="152" x2="150" y2="262" stroke="#c8a455" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.6"/>
+      <line x1="147" y1="152" x2="153" y2="152" stroke="#c8a455" stroke-width="1" opacity="0.7"/>
+      <line x1="147" y1="262" x2="153" y2="262" stroke="#c8a455" stroke-width="1" opacity="0.7"/>
+      <text x="138" y="212" fill="#c8a455" font-size="8" text-anchor="middle" transform="rotate(-90,138,212)" font-family="serif">Salto H</text>
+      <!-- ETIQUETAS NUMERADAS -->
+      <g font-family="serif" font-size="8" font-weight="bold">
+        <circle cx="172" cy="128" r="6.5" fill="#5ac8f5" opacity="0.9"/><text x="172" y="131" fill="#0e1a2b" text-anchor="middle">1</text>
+        <circle cx="193" cy="206" r="6.5" fill="#5ac8f5" opacity="0.9"/><text x="193" y="209" fill="#0e1a2b" text-anchor="middle">2</text>
+        <circle cx="295" cy="196" r="6.5" fill="#1e88c8" opacity="0.9"/><text x="295" y="199" fill="white" text-anchor="middle">3</text>
+        <circle cx="413" cy="198" r="6.5" fill="#1e88c8" opacity="0.9"/><text x="413" y="201" fill="white" text-anchor="middle">4</text>
+        <circle cx="428" cy="240" r="6.5" fill="#1e88c8" opacity="0.9"/><text x="428" y="243" fill="white" text-anchor="middle">5</text>
+        <circle cx="497" cy="245" r="6.5" fill="#5ac8f5" opacity="0.9"/><text x="497" y="248" fill="#0e1a2b" text-anchor="middle">6</text>
+        <circle cx="656" cy="260" r="6.5" fill="#1e88c8" opacity="0.9"/><text x="656" y="263" fill="white" text-anchor="middle">7</text>
+        <circle cx="599" cy="226" r="6.5" fill="#c8a455" opacity="0.95"/><text x="599" y="229" fill="#0e1a2b" text-anchor="middle">8</text>
+      </g>
+      <!-- LEYENDA -->
+      <rect x="8" y="230" width="136" height="45" rx="2" fill="#0e1a2b" fill-opacity="0.9" stroke="#5ac8f5" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="14" y="242" fill="#5ac8f5" font-size="7" font-family="serif">1·Presa  2·Toma  3·Canal deriv.</text>
+      <text x="14" y="253" fill="rgba(255,255,255,0.55)" font-size="7" font-family="serif">4·Cám.presión  5·Tub.presión</text>
+      <text x="14" y="264" fill="rgba(255,255,255,0.55)" font-size="7" font-family="serif">6·Turbinas  7·Desagüe  8·Transf.</text>
+    </svg>
+    <div class="fig-cap">Fig. 1 — Esquema longitudinal de una central hidroeléctrica de derivación con todos sus elementos numerados</div>
+  </div>
+
+  <!-- 1. PRESA -->
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ink);margin:32px 0 10px;padding-left:16px;border-left:3px solid var(--foam);">① La Presa</h3>
+  <p class="body-text">Obra de ingeniería civil que retiene el agua del río formando el <strong>embalse</strong>. Crea la diferencia de cota (salto H) que permite generar energía. Incluye el <em>aliviadero</em> (seguridad ante crecidas), el <em>desagüe de fondo</em> y compuertas de regulación.</p>
+  <div class="fig">
+    <svg viewBox="0 0 700 140" width="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="700" height="140" fill="#0e1a2b"/>
+      <text x="350" y="18" fill="#5ac8f5" font-size="9" text-anchor="middle" font-family="serif" letter-spacing="1">TIPOS DE PRESA</text>
+      <!-- GRAVEDAD -->
+      <g transform="translate(20,25)"><rect width="200" height="100" fill="#112240" rx="3"/>
+        <path d="M60,15 L85,85 L60,85Z" fill="#3a3530"/>
+        <path d="M60,15 L105,85 L85,85Z" fill="#4a4540"/>
+        <path d="M20,25 Q50,20 60,20 L60,85 L20,85Z" fill="#1a4a7a" opacity="0.7"/>
+        <path d="M20,28 Q50,23 60,23" stroke="#5ac8f5" stroke-width="0.9" fill="none" opacity="0.5"/>
+        <text x="100" y="105" fill="#5ac8f5" font-size="9" text-anchor="middle" font-family="serif">Gravedad</text>
+        <text x="100" y="115" fill="rgba(255,255,255,0.35)" font-size="7.5" text-anchor="middle">Hormigón · valles amplios</text>
+      </g>
+      <!-- ARCO -->
+      <g transform="translate(250,25)"><rect width="200" height="100" fill="#112240" rx="3"/>
+        <path d="M20,20 Q60,18 80,18 L80,85 L20,85Z" fill="#1a4a7a" opacity="0.7"/>
+        <path d="M20,23 Q55,21 75,21" stroke="#5ac8f5" stroke-width="0.9" fill="none" opacity="0.5"/>
+        <path d="M78,12 Q108,48 78,85" stroke="#4a4540" stroke-width="12" fill="none"/>
+        <path d="M84,13 Q110,48 84,85" stroke="#3a3530" stroke-width="4" fill="none"/>
+        <text x="100" y="105" fill="#5ac8f5" font-size="9" text-anchor="middle" font-family="serif">Arco</text>
+        <text x="100" y="115" fill="rgba(255,255,255,0.35)" font-size="7.5" text-anchor="middle">Hormigón · valles estrechos</text>
+      </g>
+      <!-- ESCOLLERA -->
+      <g transform="translate(480,25)"><rect width="200" height="100" fill="#112240" rx="3"/>
+        <path d="M15,18 Q50,15 70,18 L70,85 L15,85Z" fill="#1a4a7a" opacity="0.7"/>
+        <path d="M15,21 Q48,18 65,21" stroke="#5ac8f5" stroke-width="0.9" fill="none" opacity="0.5"/>
+        <path d="M70,12 L90,85 L70,85Z" fill="#5a4830" opacity="0.85"/>
+        <path d="M70,12 L150,85 L90,85Z" fill="#4a3820" opacity="0.85"/>
+        <path d="M75,18 L82,85 L70,85Z" fill="#2a2018" opacity="0.8"/>
+        <text x="100" y="105" fill="#5ac8f5" font-size="9" text-anchor="middle" font-family="serif">Escollera/Tierra</text>
+        <text x="100" y="115" fill="rgba(255,255,255,0.35)" font-size="7.5" text-anchor="middle">Mat. sueltos · valles amplios</text>
+      </g>
+    </svg>
+    <div class="fig-cap">Fig. 2 — Tipologías de presas según su forma y material</div>
+  </div>
+
+  <!-- 2. TOMA DE AGUA -->
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ink);margin:32px 0 10px;padding-left:16px;border-left:3px solid var(--foam);">② Toma de Agua</h3>
+  <p class="body-text">Estructura que <strong>capta el agua del embalse</strong> y la dirige hacia el canal. Se sitúa bajo la superficie para evitar flotantes y aire. Cuenta con <strong>rejas de protección</strong> (retienen sólidos gruesos), <strong>compuerta de guardia</strong> (cierre de emergencia) y en muchos casos un <strong>desarenador</strong> para eliminar sedimentos finos antes de que alcancen la turbina.</p>
+
+  <!-- 3. CANAL DE DERIVACIÓN -->
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ink);margin:32px 0 10px;padding-left:16px;border-left:3px solid var(--foam);">③ Canal de Derivación</h3>
+  <p class="body-text">Conducción a <strong>presión atmosférica</strong> (lámina libre) que transporta el agua desde la toma hasta la cámara de presión. Sigue las curvas de nivel con pendiente muy suave (0,001–0,003 m/m). Puede ser canal abierto revestido de hormigón, galería excavada en roca o tubería. La velocidad se diseña entre <strong>1 y 3 m/s</strong> para evitar sedimentación y erosión (fórmula de Manning: v = 1/n · R²/³ · S¹/²).</p>
+
+  <!-- 4. CÁMARA DE PRESIÓN -->
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ink);margin:32px 0 10px;padding-left:16px;border-left:3px solid var(--foam);">④ Cámara de Presión</h3>
+  <p class="body-text">Depósito regulador en el extremo del canal que hace de <strong>transición entre la lámina libre y la conducción a presión</strong>. Amortigua las variaciones bruscas de caudal (evita golpes de ariete), actúa como <strong>desarenador final</strong> y garantiza suministro continuo a la turbina. Incluye aliviadero lateral de seguridad, compuerta de fondo y ventosa.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 700 200" width="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="700" height="200" fill="#0e1a2b"/>
+      <defs><marker id="aF" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5z" fill="#5ac8f5" opacity="0.8"/></marker></defs>
+      <!-- Panel izq: Cámara de presión con tubería salida -->
+      <text x="175" y="16" fill="#5ac8f5" font-size="9" text-anchor="middle" font-family="serif">CÁMARA DE PRESIÓN</text>
+      <!-- canal entrante -->
+      <rect x="10" y="75" width="90" height="22" fill="#1e88c8" opacity="0.65" rx="2"/>
+      <path d="M30,84 L55,84" stroke="#5ac8f5" stroke-width="1.2" marker-end="url(#aF)" opacity="0.7"/>
+      <text x="50" y="68" fill="#1a4a7a" font-size="7.5" text-anchor="middle" font-family="serif">Canal</text>
+      <!-- cámara -->
+      <rect x="100" y="42" width="150" height="120" rx="3" fill="#0e1a2b" stroke="#5ac8f5" stroke-width="1.2"/>
+      <rect x="102" y="44" width="146" height="72" fill="#1a4a7a" opacity="0.6" rx="2"/>
+      <path d="M105,48 Q175,44 247,48" stroke="#5ac8f5" stroke-width="1.2" fill="none" opacity="0.6"/>
+      <path d="M105,57 Q175,54 247,57" stroke="#5ac8f5" stroke-width="0.7" fill="none" opacity="0.3"/>
+      <!-- lodo -->
+      <path d="M102,110 Q175,106 246,110 L246,116 L102,116Z" fill="#1e120a" opacity="0.7"/>
+      <text x="175" y="113" fill="rgba(255,255,255,0.28)" font-size="6.5" text-anchor="middle" font-family="serif">sedimentos</text>
+      <!-- nivel max -->
+      <line x1="102" y1="48" x2="250" y2="48" stroke="#c8a455" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.6"/>
+      <text x="252" y="46" fill="#c8a455" font-size="7" font-family="serif">N.máx.</text>
+      <!-- aliviadero -->
+      <rect x="248" y="42" width="10" height="26" fill="#3a3530" rx="1"/>
+      <text x="275" y="60" fill="rgba(255,255,255,0.4)" font-size="7" font-family="serif">Aliv.</text>
+      <!-- compuerta fondo -->
+      <rect x="150" y="114" width="8" height="22" fill="#c8a455" opacity="0.7" rx="1"/>
+      <line x1="154" y1="114" x2="154" y2="100" stroke="#c8a455" stroke-width="1.2"/>
+      <!-- tubería presión salida -->
+      <rect x="168" y="136" width="132" height="16" fill="#1e88c8" opacity="0.75" rx="2"/>
+      <path d="M185,143 L220,143" stroke="#5ac8f5" stroke-width="1" marker-end="url(#aF)" opacity="0.6"/>
+      <path d="M250,143 L285,143" stroke="#5ac8f5" stroke-width="1" marker-end="url(#aF)" opacity="0.6"/>
+      <text x="240" y="167" fill="#5ac8f5" font-size="8" text-anchor="middle" font-family="serif">→ Tubería de presión</text>
+      <!-- ventosa -->
+      <line x1="200" y1="44" x2="200" y2="28" stroke="#3a3530" stroke-width="2.5"/>
+      <circle cx="200" cy="23" r="5" fill="#3a3530" stroke="#5ac8f5" stroke-width="0.8"/>
+      <text x="200" y="17" fill="rgba(255,255,255,0.35)" font-size="7" text-anchor="middle" font-family="serif">Ventosa</text>
+
+      <!-- Panel der: tubería forzada -->
+      <text x="530" y="16" fill="#5ac8f5" font-size="9" text-anchor="middle" font-family="serif">TUBERÍA DE PRESIÓN</text>
+      <!-- ladera -->
+      <path d="M370,50 Q430,55 480,70 Q530,85 580,100 Q620,112 660,120 Q690,126 700,128 L700,200 L370,200Z" fill="#1a2e14" opacity="0.3"/>
+      <!-- tubería -->
+      <path d="M380,72 Q440,85 500,105 Q560,124 620,148 Q655,163 690,175" stroke="#112240" stroke-width="18" fill="none" stroke-linecap="round"/>
+      <path d="M380,72 Q440,85 500,105 Q560,124 620,148 Q655,163 690,175" stroke="#1e88c8" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <path d="M380,72 Q440,85 500,105 Q560,124 620,148 Q655,163 690,175" stroke="#5ac8f5" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.4"/>
+      <!-- macizos anclaje -->
+      <rect x="430" y="82" width="22" height="18" fill="#3a3530" rx="2" opacity="0.9"/>
+      <rect x="540" y="118" width="22" height="18" fill="#3a3530" rx="2" opacity="0.9"/>
+      <text x="441" y="112" fill="rgba(255,255,255,0.4)" font-size="6.5" text-anchor="middle" font-family="serif">anclaje</text>
+      <text x="551" y="148" fill="rgba(255,255,255,0.4)" font-size="6.5" text-anchor="middle" font-family="serif">anclaje</text>
+      <!-- juntas dilatación -->
+      <ellipse cx="490" cy="101" rx="4" ry="9" fill="none" stroke="#c8a455" stroke-width="1.5" opacity="0.8"/>
+      <ellipse cx="610" cy="142" rx="4" ry="9" fill="none" stroke="#c8a455" stroke-width="1.5" opacity="0.8"/>
+      <text x="490" y="121" fill="#c8a455" font-size="6" text-anchor="middle" font-family="serif">J.dil.</text>
+      <!-- válvula guardia -->
+      <rect x="670" y="166" width="15" height="18" fill="#c8a455" opacity="0.7" rx="1"/>
+      <text x="677" y="196" fill="#c8a455" font-size="7" text-anchor="middle" font-family="serif">Válv.</text>
+      <!-- cota salto -->
+      <line x1="368" y1="72" x2="368" y2="175" stroke="#c8a455" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.5"/>
+      <text x="358" y="124" fill="#c8a455" font-size="8" text-anchor="middle" transform="rotate(-90,358,124)" font-family="serif">Salto H</text>
+    </svg>
+    <div class="fig-cap">Fig. 3 — Izq: sección de cámara de presión. Dcha: tubería de presión con macizos de anclaje, juntas de dilatación y válvula de guardia</div>
+  </div>
+
+  <!-- 5. TUBERÍA DE PRESIÓN -->
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ink);margin:32px 0 10px;padding-left:16px;border-left:3px solid var(--foam);">⑤ Tubería de Presión (Tubería Forzada)</h3>
+  <p class="body-text">Conducción de <strong>acero al carbono</strong> que lleva el agua a alta presión desde la cámara hasta la turbina. Es el elemento más solicitado mecánicamente. Incluye <em>macizos de anclaje</em> (absorben empujes axiales), <em>apoyos deslizantes</em> (permiten dilatación), <em>juntas de dilatación</em> y <em>válvula de guardia mariposa</em>.</p>
+  <div class="callout">
+    <span class="icon">⚠️</span>
+    <p><strong>Golpe de ariete:</strong> Al cerrar bruscamente la turbina, el agua frenada genera una sobrepresión destructiva. Se controla con <em>chimeneas de equilibrio</em> (en centrales con galería) o válvulas de alivio rápido. El diseño de la tubería debe contemplar estas sobrepresiones dinámicas.</p>
+  </div>
+
+  <!-- 6. CÁMARA DE TURBINAS -->
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ink);margin:32px 0 10px;padding-left:16px;border-left:3px solid var(--foam);">⑥ Cámara de Turbinas (Sala de Máquinas)</h3>
+  <p class="body-text">Edificio central donde se produce la <strong>conversión de energía hidráulica → mecánica → eléctrica</strong>. Contiene los grupos turbina-alternador, el sistema de regulación de velocidad (para mantener 50 Hz), sistemas de refrigeración y el cuadro de control.</p>
+
+  <!-- TURBINAS -->
+  <div class="turb-cards">
+    <div class="turb-card">
+      <div class="turb-head">
+        <h4>Turbina Pelton</h4>
+        <div class="range">Salto &gt; 200 m · Caudal pequeño</div>
+      </div>
+      <div class="turb-body">
+        <p>Turbina de <strong>acción</strong>. El agua sale por inyectores en forma de chorro a gran velocidad que impacta en cazos (cucharas) del rodete. Eje horizontal o vertical. Alta montaña.</p>
+      </div>
+    </div>
+    <div class="turb-card">
+      <div class="turb-head">
+        <h4>Turbina Francis</h4>
+        <div class="range">Salto 20–200 m · Caudal moderado</div>
+      </div>
+      <div class="turb-body">
+        <p>Turbina de <strong>reacción</strong> mixta. El agua entra en espiral por la carcasa, atraviesa el distribuidor de paletas y el rodete. La más utilizada en el mundo. Eje vertical.</p>
+      </div>
+    </div>
+    <div class="turb-card">
+      <div class="turb-head">
+        <h4>Turbina Kaplan</h4>
+        <div class="range">Salto &lt; 20 m · Gran caudal</div>
+      </div>
+      <div class="turb-body">
+        <p>Turbina de <strong>reacción axial</strong>. Paletas ajustables que permiten adaptarse al caudal. Ideal para grandes ríos de llanura con pequeños desniveles. Alta eficiencia en rango amplio.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 700 180" width="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="700" height="180" fill="#0e1a2b"/>
+      <text x="350" y="16" fill="#5ac8f5" font-size="9" text-anchor="middle" font-family="serif" letter-spacing="0.5">ESQUEMA SIMPLIFICADO DE TURBINAS</text>
+      <!-- PELTON -->
+      <g transform="translate(20,25)"><rect width="210" height="130" fill="#112240" rx="3"/>
+        <circle cx="105" cy="68" r="48" fill="none" stroke="#5ac8f5" stroke-width="1" opacity="0.25"/>
+        <circle cx="105" cy="68" r="3" fill="#5ac8f5" opacity="0.7"/>
+        <g opacity="0.7" fill="#0d2a50" stroke="#5ac8f5" stroke-width="1">
+          <path d="M105,20 Q118,28 120,42 Q122,56 110,62 Q98,68 88,62 Q78,56 82,42 Q86,28 105,20Z"/>
+          <path d="M145,34 Q156,46 152,60 Q148,74 136,74 Q124,74 120,62 Q116,50 124,42 Q132,34 145,34Z"/>
+          <path d="M155,76 Q160,91 152,102 Q144,113 132,110 Q120,107 118,94 Q116,81 126,75 Q136,69 155,76Z"/>
+          <path d="M130,112 Q133,128 122,135 Q111,142 102,136 Q93,130 96,118 Q99,106 110,104Z"/>
+          <path d="M90,118 Q88,134 76,138 Q64,142 57,134 Q50,126 56,115 Q62,104 74,105Z"/>
+          <path d="M56,100 Q47,113 36,110 Q25,107 24,95 Q23,83 33,78 Q43,73 52,81Z"/>
+          <path d="M48,62 Q40,75 28,70 Q16,65 16,53 Q16,41 28,39 Q40,37 46,48Z"/>
+          <path d="M63,30 Q57,44 46,40 Q35,36 36,24 Q37,12 49,11 Q61,10 65,22Z"/>
+        </g>
+        <path d="M-5,66 Q18,66 32,68" stroke="#00e5ff" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+        <text x="105" y="152" fill="#5ac8f5" font-size="9" text-anchor="middle" font-family="serif" font-weight="bold">PELTON</text>
+        <text x="105" y="163" fill="rgba(255,255,255,0.35)" font-size="7" text-anchor="middle">chorro a presión → cazos</text>
+      </g>
+      <!-- FRANCIS -->
+      <g transform="translate(245,25)"><rect width="210" height="130" fill="#112240" rx="3"/>
+        <path d="M105,68 m-55,0 a55,55 0 1,1 110,0 a55,55 0 0,1 -75,42 Q48,118 48,98" fill="none" stroke="#5ac8f5" stroke-width="7" opacity="0.25"/>
+        <circle cx="105" cy="68" r="36" fill="none" stroke="#1e88c8" stroke-width="5" opacity="0.4"/>
+        <circle cx="105" cy="68" r="22" fill="#0d2a50" opacity="0.85" stroke="#5ac8f5" stroke-width="1.2"/>
+        <g fill="none" stroke="#5ac8f5" stroke-width="1.2" opacity="0.8">
+          <path d="M105,46 Q120,52 122,66 Q124,80 112,87 Q100,94 90,88 Q80,82 82,68 Q84,54 95,48"/>
+          <path d="M122,66 Q130,54 125,69 M105,90 Q95,97 105,82"/>
+        </g>
+        <line x1="105" y1="46" x2="105" y2="18" stroke="#c8a455" stroke-width="2" opacity="0.6"/>
+        <path d="M105,90 Q105,108 105,120" stroke="#1e88c8" stroke-width="10" opacity="0.5"/>
+        <path d="M30,68 Q55,68 68,68" stroke="#00e5ff" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+        <text x="105" y="152" fill="#5ac8f5" font-size="9" text-anchor="middle" font-family="serif" font-weight="bold">FRANCIS</text>
+        <text x="105" y="163" fill="rgba(255,255,255,0.35)" font-size="7" text-anchor="middle">espiral → rodete → tubo asp.</text>
+      </g>
+      <!-- KAPLAN -->
+      <g transform="translate(470,25)"><rect width="210" height="130" fill="#112240" rx="3"/>
+        <rect x="30" y="58" width="150" height="22" fill="#0d2a50" opacity="0.7" rx="3"/>
+        <rect x="30" y="60" width="150" height="18" fill="#1a4a7a" opacity="0.5" rx="2"/>
+        <circle cx="105" cy="68" r="18" fill="#0d2a50" opacity="0.85" stroke="#5ac8f5" stroke-width="1.5"/>
+        <g fill="none" stroke="#5ac8f5" stroke-width="2" opacity="0.8">
+          <path d="M105,50 Q116,56 117,68 Q118,80 105,86" />
+          <path d="M105,50 Q116,56 117,68 Q118,80 105,86" transform="rotate(72,105,68)"/>
+          <path d="M105,50 Q116,56 117,68 Q118,80 105,86" transform="rotate(144,105,68)"/>
+          <path d="M105,50 Q116,56 117,68 Q118,80 105,86" transform="rotate(216,105,68)"/>
+          <path d="M105,50 Q116,56 117,68 Q118,80 105,86" transform="rotate(288,105,68)"/>
+        </g>
+        <circle cx="105" cy="68" r="4.5" fill="#5ac8f5" opacity="0.7"/>
+        <path d="M20,67 L38,67" stroke="#00e5ff" stroke-width="1.5" marker-end="url(#aF)" opacity="0.7"/>
+        <path d="M172,67 L190,67" stroke="#00e5ff" stroke-width="1.5" marker-end="url(#aF)" opacity="0.7"/>
+        <line x1="105" y1="50" x2="105" y2="22" stroke="#c8a455" stroke-width="2" opacity="0.6"/>
+        <text x="105" y="152" fill="#5ac8f5" font-size="9" text-anchor="middle" font-family="serif" font-weight="bold">KAPLAN</text>
+        <text x="105" y="163" fill="rgba(255,255,255,0.35)" font-size="7" text-anchor="middle">flujo axial · paletas ajustables</text>
+      </g>
+    </svg>
+    <div class="fig-cap">Fig. 4 — Esquemas de los tres tipos de turbinas hidráulicas: Pelton (acción), Francis y Kaplan (reacción)</div>
+  </div>
+
+  <!-- 7. CANAL DESAGÜE -->
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ink);margin:32px 0 10px;padding-left:16px;border-left:3px solid var(--foam);">⑦ Canal de Desagüe</h3>
+  <p class="body-text">Conducción que <strong>restituye el agua al cauce natural</strong> una vez extraída su energía. Su cota determina el nivel de descarga inferior del salto bruto. Debe incluir <em>escala de peces</em> (obligatoria legalmente para garantizar la continuidad ecológica del río) y respetar el <strong>caudal ecológico mínimo</strong> legalmente establecido.</p>
+
+  <!-- 8. PARQUE TRANSFORMACIONES -->
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ink);margin:32px 0 10px;padding-left:16px;border-left:3px solid var(--foam);">⑧ Parque de Transformaciones</h3>
+  <p class="body-text">Subestación elevadora que sube la tensión de los alternadores (<strong>6–20 kV</strong>) a la tensión de transporte (<strong>66–400 kV</strong>) para reducir pérdidas en la línea. Contiene transformadores elevadores, interruptores de potencia, seccionadores, pararrayos y transformadores de medida (TT/TI).</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 700 120" width="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="700" height="120" fill="#0e1a2b"/>
+      <text x="350" y="15" fill="#c8a455" font-size="9" text-anchor="middle" font-family="serif" letter-spacing="0.5">DIAGRAMA UNIFILAR — EVACUACIÓN ELÉCTRICA</text>
+      <defs><marker id="aE" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5z" fill="#c8a455"/></marker></defs>
+      <!-- Alternador -->
+      <circle cx="55" cy="72" r="24" fill="#112240" stroke="#5ac8f5" stroke-width="1.3"/>
+      <text x="55" y="68" fill="#5ac8f5" font-size="8" text-anchor="middle" font-family="serif">ALT</text>
+      <text x="55" y="78" fill="#5ac8f5" font-size="9" text-anchor="middle">~</text>
+      <text x="55" y="105" fill="rgba(255,255,255,0.4)" font-size="7" text-anchor="middle">6-20 kV</text>
+      <!-- cable BT -->
+      <line x1="79" y1="72" x2="110" y2="72" stroke="#5ac8f5" stroke-width="2.5" opacity="0.7"/>
+      <!-- Int. salida -->
+      <rect x="110" y="63" width="16" height="18" fill="#112240" stroke="#5ac8f5" stroke-width="1" rx="2"/>
+      <text x="118" y="92" fill="rgba(255,255,255,0.35)" font-size="6.5" text-anchor="middle">Int.</text>
+      <line x1="118" y1="63" x2="118" y2="55" stroke="#5ac8f5" stroke-width="1.3"/>
+      <line x1="118" y1="81" x2="118" y2="89" stroke="#5ac8f5" stroke-width="1.3"/>
+      <line x1="118" y1="89" x2="158" y2="89" stroke="#5ac8f5" stroke-width="2" opacity="0.6"/>
+      <!-- Transformador -->
+      <g transform="translate(158,42)">
+        <rect x="0" y="0" width="52" height="60" rx="2" fill="#1a1628" stroke="#c8a455" stroke-width="1.3"/>
+        <circle cx="26" cy="20" r="13" fill="none" stroke="#c8a455" stroke-width="1.2"/>
+        <circle cx="26" cy="40" r="13" fill="none" stroke="#c8a455" stroke-width="1.2"/>
+        <text x="26" y="75" fill="#c8a455" font-size="7.5" text-anchor="middle" font-family="serif">TRAFO</text>
+      </g>
+      <!-- cable AT -->
+      <line x1="210" y1="72" x2="258" y2="72" stroke="#c8a455" stroke-width="2" opacity="0.7"/>
+      <!-- Int AT -->
+      <rect x="258" y="63" width="16" height="18" fill="#1a1628" stroke="#c8a455" stroke-width="1" rx="2"/>
+      <line x1="266" y1="63" x2="266" y2="55" stroke="#c8a455" stroke-width="1.3"/>
+      <line x1="266" y1="81" x2="266" y2="89" stroke="#c8a455" stroke-width="1.3"/>
+      <!-- Barras AT -->
+      <line x1="266" y1="89" x2="480" y2="89" stroke="#c8a455" stroke-width="3" opacity="0.65"/>
+      <text x="370" y="100" fill="#c8a455" font-size="7.5" text-anchor="middle" font-family="serif">BARRAS AT (132 kV)</text>
+      <!-- Pararrayo -->
+      <line x1="340" y1="89" x2="340" y2="68" stroke="#c8a455" stroke-width="1.2"/>
+      <path d="M334,75 L346,75 L340,84 L346,84 L334,92" stroke="#c8a455" stroke-width="1" fill="none"/>
+      <text x="340" y="62" fill="rgba(255,255,255,0.3)" font-size="6.5" text-anchor="middle">Pararrayo</text>
+      <!-- TT/TI -->
+      <rect x="400" y="60" width="26" height="18" fill="#1a1628" stroke="#c8a455" stroke-width="1" rx="2"/>
+      <text x="413" y="72" fill="#c8a455" font-size="7" text-anchor="middle">TT/TI</text>
+      <!-- Secc. -->
+      <line x1="450" y1="89" x2="480" y2="72" stroke="#c8a455" stroke-width="1.3" opacity="0.7"/>
+      <!-- Línea transmisión -->
+      <line x1="480" y1="72" x2="560" y2="72" stroke="#c8a455" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.6"/>
+      <!-- Torres -->
+      <g stroke="#c8a455" stroke-width="1.3" opacity="0.7">
+        <line x1="575" y1="35" x2="575" y2="85"/>
+        <line x1="562" y1="50" x2="588" y2="50"/>
+        <line x1="565" y1="58" x2="585" y2="58"/>
+        <line x1="575" y1="50" x2="569" y2="62"/>
+        <line x1="575" y1="50" x2="581" y2="62"/>
+        <circle cx="562" cy="50" r="2.5" fill="#c8a455" opacity="0.5"/>
+        <circle cx="588" cy="50" r="2.5" fill="#c8a455" opacity="0.5"/>
+        <circle cx="565" cy="58" r="2" fill="#c8a455" opacity="0.4"/>
+        <circle cx="585" cy="58" r="2" fill="#c8a455" opacity="0.4"/>
+      </g>
+      <line x1="588" y1="50" x2="640" y2="50" stroke="#c8a455" stroke-width="1" stroke-dasharray="4,3" opacity="0.5" marker-end="url(#aE)"/>
+      <text x="660" y="54" fill="rgba(255,255,255,0.4)" font-size="7.5" font-family="serif">Red</text>
+      <text x="184" y="36" fill="rgba(255,255,255,0.35)" font-size="7" text-anchor="middle">↑ 6 kV</text>
+      <text x="230" y="36" fill="rgba(255,255,255,0.35)" font-size="7" text-anchor="middle">132 kV ↑</text>
+    </svg>
+    <div class="fig-cap">Fig. 5 — Diagrama unifilar simplificado: alternador → transformador elevador → barras AT → línea de alta tensión</div>
+  </div>
+
+  <table class="data-table">
+    <tr><th>Elemento</th><th>Función principal</th><th>Dato técnico</th></tr>
+    <tr><td>Presa</td><td>Crear el embalse y el salto hidráulico</td><td>Puede superar 300 m de altura</td></tr>
+    <tr><td>Toma de agua</td><td>Captar y filtrar el caudal</td><td>Equipada con rejas y compuerta de guardia</td></tr>
+    <tr><td>Canal derivación</td><td>Conducir agua a presión atmosférica</td><td>Pendiente 0,001–0,003 m/m · v = 1–3 m/s</td></tr>
+    <tr><td>Cámara de presión</td><td>Regularizar el flujo y decantar sedimentos</td><td>Volumen: 5–10 min de suministro</td></tr>
+    <tr><td>Tubería de presión</td><td>Conducir agua a alta presión hasta la turbina</td><td>Acero · hasta 150 bar en grandes saltos</td></tr>
+    <tr><td>Cámara de turbinas</td><td>Conversión hidráulica → mecánica → eléctrica</td><td>Rendimiento global ~88–92%</td></tr>
+    <tr><td>Canal desagüe</td><td>Restituir el agua al río</td><td>Caudal ecológico mínimo obligatorio</td></tr>
+    <tr><td>Parque transformaciones</td><td>Elevar tensión para transporte en red</td><td>6–20 kV → 66–400 kV</td></tr>
+  </table>
+</section>
+
+<div class="div"></div>
+
+<!-- ====== IV. CLASIFICACIÓN ====== -->
+<section class="section" id="clasificacion">
+  <div class="section-header">
+    <div class="section-n">IV</div>
+    <div class="section-head-text">
+      <p class="label">Tipologías y criterios</p>
+      <h2>Clasificación de las Centrales Hidroeléctricas</h2>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--mid);margin:0 0 12px;">A · Según su concepción estructural</h3>
+  <div class="cards">
+    <div class="card"><h4>💧 Agua Fluyente</h4><p>Sin embalse significativo. Usan el caudal natural del río. La producción depende del régimen de lluvias. No regulables según demanda.</p></div>
+    <div class="card"><h4>🏔️ Regulación (Embalse)</h4><p>Presa crea lago artificial para almacenar agua. Permiten generar según la demanda, independientemente del caudal del río.</p></div>
+    <div class="card"><h4>⚡ Bombeo (Reversibles)</h4><p>Dos embalses a distinta cota. En horas punta: turbina. En horas valle: bomba. Actúan como <em>"batería gigante"</em> del sistema eléctrico.</p></div>
+    <div class="card"><h4>🌊 Hidráulica de Mareas</h4><p>Aprovechan el ciclo de mareas en estuarios. Menos extendidas, pero con potencial en costas con grandes mareas (ej. La Rance, Francia).</p></div>
+  </div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--mid);margin:20px 0 12px;">B · Según la altura del salto</h3>
+  <table class="data-table">
+    <tr><th>Tipo</th><th>Salto (H)</th><th>Caudal</th><th>Turbina</th><th>Ejemplo</th></tr>
+    <tr><td><strong>Alta presión</strong></td><td>&gt; 200 m</td><td>Pequeño</td><td>Pelton</td><td>Alta montaña alpina</td></tr>
+    <tr><td><strong>Media presión</strong></td><td>20–200 m</td><td>Moderado</td><td>Francis</td><td>Valles y ríos medianos</td></tr>
+    <tr><td><strong>Baja presión</strong></td><td>&lt; 20 m</td><td>Grande</td><td>Kaplan / Hélice</td><td>Grandes ríos de llanura</td></tr>
+  </table>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--mid);margin:20px 0 12px;">C · Según la potencia instalada</h3>
+  <div class="stats">
+    <div class="stat"><div class="stat-val">&lt;1 MW</div><div class="stat-label">Microcentral</div></div>
+    <div class="stat"><div class="stat-val">1–10 MW</div><div class="stat-label">Minicentral</div></div>
+    <div class="stat"><div class="stat-val">&gt;10 MW</div><div class="stat-label">Gran central</div></div>
+    <div class="stat"><div class="stat-val">22.500 MW</div><div class="stat-label">Tres Gargantas (China)</div></div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ====== V. EMPLAZAMIENTO ====== -->
+<section class="section" id="emplazamiento">
+  <div class="section-header">
+    <div class="section-n">V</div>
+    <div class="section-head-text">
+      <p class="label">Localización y criterios técnicos</p>
+      <h2>Emplazamiento de Sistemas Hidráulicos</h2>
+    </div>
+  </div>
+
+  <p class="body-text">La elección del emplazamiento es decisiva para la viabilidad técnica y económica de una central. Los <strong>factores determinantes</strong> son:</p>
+
+  <div class="cards">
+    <div class="card"><h4>🌊 Disponibilidad hídrica</h4><p>Caudal suficiente y regular a lo largo del año, incluyendo períodos secos. Se analiza la serie histórica de aforos del río.</p></div>
+    <div class="card"><h4>📐 Desnivel topográfico</h4><p>Mayor desnivel = mayor salto H = mayor potencia. Los valles en "V" de montaña son ideales para grandes saltos con embalse compacto.</p></div>
+    <div class="card"><h4>🌿 Impacto ambiental</h4><p>Estudios de impacto ambiental (EIA) obligatorios. Se evalúa la afección a fauna, flora, hábitats y población.</p></div>
+    <div class="card"><h4>🏙️ Proximidad a la demanda</h4><p>Menor distancia a centros de consumo reduce costes y pérdidas en el transporte eléctrico.</p></div>
+    <div class="card"><h4>🪨 Geología y estabilidad</h4><p>El terreno debe ser impermeable y resistente para soportar la presa y el embalse sin filtraciones ni riesgos de deslizamiento.</p></div>
+    <div class="card"><h4>🚧 Accesibilidad</h4><p>Posibilidad de construir vías de acceso para maquinaria pesada, materiales y posterior operación y mantenimiento.</p></div>
+  </div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--mid);margin:20px 0 12px;">Tipos de emplazamiento</h3>
+  <ul class="tech-list">
+    <li><strong>En ríos:</strong> zonas con caudal constante o semiestacional. Son los más comunes a nivel mundial.</li>
+    <li><strong>En zonas montañosas:</strong> aprovechan grandes desniveles. Centrales de alta presión con túneles y largos canales de derivación.</li>
+    <li><strong>En embalses existentes:</strong> se añade una central a una presa ya construida para abastecimiento o riego, maximizando el aprovechamiento del recurso.</li>
+    <li><strong>En canales de riego:</strong> minicentrales que aprovechan el caudal circulante en infraestructuras agrícolas existentes con impacto ambiental mínimo.</li>
+  </ul>
+</section>
+
+<div class="div"></div>
+
+<!-- ====== VI. IMPACTO AMBIENTAL ====== -->
+<section class="section" id="impacto">
+  <div class="section-header">
+    <div class="section-n">VI</div>
+    <div class="section-head-text">
+      <p class="label">Medio ambiente y sostenibilidad</p>
+      <h2>Impacto Ambiental</h2>
+    </div>
+  </div>
+
+  <p class="body-text">Aunque la energía hidroeléctrica es renovable y no emite CO₂ durante su operación, la construcción y el funcionamiento de presas y centrales pueden <strong>alterar significativamente los ecosistemas fluviales</strong>. Por ello, la legislación exige Estudios de Impacto Ambiental previos.</p>
+
+  <div class="pros-cons">
+    <div class="pros">
+      <h4>Ventajas ambientales</h4>
+      <ul>
+        <li>Energía renovable sin emisiones directas</li>
+        <li>Sin residuos radiactivos ni contaminantes</li>
+        <li>Regulación de crecidas e inundaciones</li>
+        <li>Almacenamiento hídrico para sequías</li>
+        <li>Larga vida útil (50–100 años)</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4>Impactos negativos</h4>
+      <ul>
+        <li>Inundación de territorios y ecosistemas</li>
+        <li>Interrupción de la continuidad fluvial</li>
+        <li>Bloqueo de la migración de peces</li>
+        <li>Cambios en temperatura y calidad del agua</li>
+        <li>Retención de sedimentos aguas arriba</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="icon">🐟</span>
+    <p><strong>Medidas correctoras:</strong> La ley obliga a instalar <em>escalas de peces</em>, respetar el <em>caudal ecológico mínimo</em> (normalmente 10% del caudal medio), construir <em>pasos para fauna terrestre</em> y realizar seguimiento ambiental continuo durante la explotación.</p>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ====== VII. ESPAÑA Y ANDALUCÍA ====== -->
+<section class="section" id="espana">
+  <div class="section-header">
+    <div class="section-n">VII</div>
+    <div class="section-head-text">
+      <p class="label">Contexto nacional y autonómico</p>
+      <h2>La Energía Hidráulica en España y Andalucía</h2>
+    </div>
+  </div>
+
+  <div class="region-box">
+    <h4>🇪🇸 España</h4>
+    <p>España cuenta con una larga tradición hidroeléctrica gracias a su red de ríos y embalses. Dispone de <strong>más de un millar de centrales</strong> hidroeléctricas, siendo una de las principales fuentes renovables del país junto con la eólica y la solar fotovoltaica. Los grandes sistemas se concentran en las cuencas del <strong>Ebro, Duero, Tajo y Miño</strong>. Las centrales de bombeo están ganando protagonismo como complemento al auge de la energía solar y eólica.</p>
+  </div>
+
+  <div class="pros-cons" style="margin-top:14px;">
+    <div class="pros">
+      <h4>Ventajas en España</h4>
+      <ul>
+        <li>Renovable y de bajas emisiones</li>
+        <li>Alta capacidad de respuesta a la demanda</li>
+        <li>Bombeo como almacenamiento energético</li>
+        <li>Infraestructura con larga vida útil</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4>Limitaciones</h4>
+      <ul>
+        <li>Dependencia de las precipitaciones</li>
+        <li>Impacto sobre ecosistemas fluviales</li>
+        <li>Alteración de paisajes y hábitats</li>
+        <li>Escasez de nuevos emplazamientos</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="region-box" style="margin-top:16px;">
+    <h4>🌞 Andalucía</h4>
+    <p>Andalucía no es la comunidad con mayor potencia hidroeléctrica —sus precipitaciones son menores que en el norte— pero cuenta con instalaciones significativas en las cuencas del <strong>Guadalquivir, Genil, Guadalhorce y Guadiana</strong>. Destacan el complejo hidroeléctrico de <strong>El Chorro</strong> (Málaga) con su central de bombeo, y los aprovechamientos ligados a los desniveles de <strong>Sierra Nevada</strong> (Granada). La estrategia energética andaluza prioriza la solar, pero la hidráulica mantiene un papel estratégico como <em>regulador y almacenamiento</em> del sistema eléctrico regional.</p>
+  </div>
+
+  <div class="callout" style="margin-top:20px;">
+    <span class="icon">🔭</span>
+    <p><strong>Perspectivas:</strong> El crecimiento de nueva hidráulica convencional será limitado por la disponibilidad hídrica y las restricciones ambientales. Sin embargo, las <strong>centrales de bombeo</strong> están llamadas a desempeñar un papel fundamental como almacenamiento de energía para integrar la creciente producción solar y eólica en la red.</p>
+  </div>
+</section>
+
+<div class="div" style="margin-bottom:40px;"></div>
+
+<!-- ====== VIII. CONCLUSIÓN ====== -->
+<section id="conclusion">
+  <div class="conclusion">
+    <h2>Conclusión</h2>
+    <p>La central hidroeléctrica es uno de los sistemas de generación eléctrica <strong>más completos, eficientes y longevos</strong> que existen. Integra principios fundamentales de la física (conservación de la energía, hidrodinámica, electromagnetismo) con ingeniería civil, mecánica y eléctrica en un proceso que transforma el agua embalsada en electricidad limpia con rendimientos superiores al 90%.</p>
+    <p>Sus ocho elementos constitutivos —desde la presa hasta el parque de transformaciones— forman una cadena perfectamente diseñada en la que cada componente tiene una función crítica e irremplazable. La elección de la turbina adecuada, la correcta dimensión del canal, el control del golpe de ariete o la elevación de tensión son ejemplos de cómo la ingeniería resuelve problemas físicos reales.</p>
+    <p>En un contexto de transición energética, la hidráulica no solo aporta energía renovable: las <strong>centrales de bombeo reversible</strong> se posicionan como la tecnología de almacenamiento más madura y eficiente del sistema eléctrico, complementando la variabilidad intrínseca de la energía solar y eólica. Su papel, lejos de decrecer, se vuelve más estratégico que nunca.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;">
+      <span class="badge" style="border-color:rgba(90,200,245,0.4);color:#a8dff5;">Energía renovable</span>
+      <span class="badge" style="border-color:rgba(90,200,245,0.4);color:#a8dff5;">Rendimiento ~90%</span>
+      <span class="badge" style="border-color:rgba(90,200,245,0.4);color:#a8dff5;">Regulable</span>
+      <span class="badge" style="border-color:rgba(200,164,85,0.4);color:#e8c878;">Almacenamiento (bombeo)</span>
+      <span class="badge" style="border-color:rgba(200,164,85,0.4);color:#e8c878;">Estratégica en España</span>
+      <span class="badge" style="border-color:rgba(200,164,85,0.4);color:#e8c878;">0 emisiones directas</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p><span>Tecnología e Ingeniería I</span> · 1.º Bachillerato B · Curso 2025–2026</p>
+  <p style="margin-top:6px;">Víctor Morales Estrada · Ángel Sánchez López · Francisco José Barranco Fernández · Javier Palenzuela Sánchez</p>
+  <p style="margin-top:6px;font-size:0.68rem;opacity:0.35;">Todos los esquemas y diagramas son de elaboración propia</p>
+</footer>
+
+</body>
+</html>
